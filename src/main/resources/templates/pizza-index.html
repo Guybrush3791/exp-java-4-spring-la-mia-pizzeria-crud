@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Le nostre pizze:</h1>
+	<ul th:if="${pizze.size()>0}">
+		<li
+			th:each="pizza : ${pizze}"
+			th:object="${pizza}"
+		>
+			[[ *{nome} ]]
+			<img width="200px" th:src="*{fotoUrl}">
+		</li>
+	</ul>
+	<h2 th:unless="${pizze.size()>0}">Spiacente, non abbiamo pizze al momento...</h2>
+</body>
+</html>
