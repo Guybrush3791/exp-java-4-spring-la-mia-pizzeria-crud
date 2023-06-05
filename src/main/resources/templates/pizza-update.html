@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body th:object="${pizza}">
-	<h1>Crea la tua pizza:</h1>
+	<h1>Aggiorna la tua pizza:</h1>
 	<form method="post">
 		<label>Nome</label>
 		<input type="text" name="nome" th:value="*{nome}">
@@ -43,7 +43,7 @@
 			[[ ${errors.getFieldError('prezzo').defaultMessage} ]]
 		</label>
 		<br>
-		<input type="submit" value="create"> 
+		<input type="submit" value="update"> 
 	</form>
 </body>
 </html>

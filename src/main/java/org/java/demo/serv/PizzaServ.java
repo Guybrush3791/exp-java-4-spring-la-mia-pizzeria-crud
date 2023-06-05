@@ -30,4 +30,8 @@ public class PizzaServ {
 		
 		return pizzaRepo.save(pizza);
 	}
+	public void delete(Pizza pizza) {
+		
+		pizzaRepo.delete(pizza);
+	}
 }

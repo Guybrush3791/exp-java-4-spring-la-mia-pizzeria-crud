@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${offerta}">
+	<h1>Crea una nuova offerta:</h1>
+	<form th:action="@{/offerta/update/{id} (id=*{id})}" method="POST">
+		<label>Titolo</label>
+		<input type="text" name="titolo" th:value="*{titolo}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('titolo')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('titolo').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Data di inizio</label>
+		<input type="date" name="dataInizio" th:value="*{dataInizio}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('dataFine')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('dataFine').defaultMessage} ]]
+		</label>
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('dataInizioBeforeDataFine')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			<br>
+			[[ *{getFieldError('dataInizioBeforeDataFine').defaultMessage} ]]
+		</label>
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('dataInizio')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('dataInizio').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Data di fine</label>
+		<input type="date" name="dataFine" th:value="*{dataFine}">
+		<br>
+		<label>Percentuale sconto</label>
+		<input type="number" name="percSconto" th:value="*{percSconto}">
+		<label
+			th:if="${errors != null && errors.hasFieldErrors('percSconto')}"
+			style="color: red"
+			th:object="${errors}"
+		>
+			[[ *{getFieldError('percSconto').defaultMessage} ]]
+		</label>
+		<br>
+		<label>Pizza</label>
+		<select name="pizza">
+			<option
+				th:each="pizza : ${pizze}"
+				th:object="${pizza}"
+				th:selected="${offerta.pizza.id == pizza.id}"
+				th:value="*{id}"
+			>
+				[[ *{nome} ]]
+			</option>
+		</select>
+		<br>
+		<input type="submit" value="UPDATE">
+	</form>
+</body>
+</html>

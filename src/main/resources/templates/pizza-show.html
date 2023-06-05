@@ -8,5 +8,19 @@
 	<h1>[[ *{nome} ]] - [[ *{prezzo}/100 ]]E</h1>
 	<h3>[[ *{descrizione} ]]</h3>
 	<img width="200px" th:src="*{fotoUrl}">	
+	<br>
+	<h3>Offerte: [[ *{offerte.size()} ]]</h3>
+	<a th:href="@{/pizze/{id}/offerte/create (id=*{id})}">
+		CREA NUOVA OFFERTA
+	</a>
+	<ul>
+		<li
+			th:each="offerta : *{offerte}"
+			th:object="${offerta}"
+		>
+			[[ *{titolo} ]] - [[ *{percSconto} ]]% - [[ *{finalPrice} ]]E
+			<a th:href="@{/offerta/update/{id} (id=*{id})}">MODIFICA</a>
+		</li>
+	</ul>
 </body>
 </html>
