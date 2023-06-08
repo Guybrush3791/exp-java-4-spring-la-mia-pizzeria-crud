@@ -3,7 +3,9 @@ package org.java.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.demo.pojo.Ingrediente;
 import org.java.demo.pojo.Pizza;
+import org.java.demo.serv.IngredienteServ;
 import org.java.demo.serv.PizzaServ;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,15 +16,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
 @Controller
+//@RequestMapping("/pizzeria")
 public class PizzaController {
 
 	@Autowired
 	private PizzaServ pizzaServ;
+	
+	@Autowired
+	private IngredienteServ ingredienteServ;
 	
 	@GetMapping("/")
 	public String getPizzaIndex(Model model) {
@@ -40,6 +47,7 @@ public class PizzaController {
 			) {
 		
 		List<Pizza> pizze = pizzaServ.findByNome(name);
+		
 		model.addAttribute("pizze", pizze);
 		model.addAttribute("search", name);
 		
@@ -49,7 +57,10 @@ public class PizzaController {
 	@GetMapping("/pizze/new")
 	public String createNewPizza(Model model) {
 		
+		List<Ingrediente> ingredienti = ingredienteServ.findAll();
+		
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("ingredienti", ingredienti);
 		
 		return "pizza-new";
 	}
@@ -100,7 +111,10 @@ public class PizzaController {
 		Optional<Pizza> pizzaOpt = pizzaServ.findById(id);
 		Pizza pizza = pizzaOpt.get();
 		
+		List<Ingrediente> ingredienti = ingredienteServ.findAll();
+		
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredienti", ingredienti);
 		
 		return "pizza-update";
 	}

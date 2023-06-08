@@ -6,7 +6,11 @@
 </head>
 <body>
 	<h1>Le nostre pizze:</h1>
-	<a href="/pizze/new">
+	<a href="/logout">
+		LOGOUT
+	</a>
+	<br>
+	<a href="/pizze/new" sec:authorize="hasAuthority('ADMIN')">
 		AGGIUNGI NUOVA PIZZA
 	</a>
 	<form action="/pizze/search" method="post">
@@ -26,8 +30,8 @@
 				<br>
 				[[ *{descrizione} ]]
 				<br>
-				<a th:href="@{/pizze/update/{id} (id=*{id})}">MODIFICA</a>
-				<a th:href="@{/pizze/delete/{id} (id=*{id})}">ELIMINA</a>
+				<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/pizze/update/{id} (id=*{id})}">MODIFICA</a>
+				<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/pizze/delete/{id} (id=*{id})}">ELIMINA</a>
 			</div>
 		</li>
 	</ul>

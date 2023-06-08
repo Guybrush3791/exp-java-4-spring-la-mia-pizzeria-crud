@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Ingredienti:</h1>
+	<a sec:authorize="hasAuthority('ADMIN')" href="/ingredienti/create">CREATE NEW INGREDIENTE</a>
+	<ul>
+		<li
+			th:each="ing : ${ingredienti}"
+			th:object="${ing}"
+		>
+			[[ *{nome} ]]
+			<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/ingredienti/delete/{id} (id=*{id})}">DELETE</a>
+		</li>
+	</ul>
+</body>
+</html>

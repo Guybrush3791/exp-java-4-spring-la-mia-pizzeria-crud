@@ -9,8 +9,18 @@
 	<h3>[[ *{descrizione} ]]</h3>
 	<img width="200px" th:src="*{fotoUrl}">	
 	<br>
+	<h3>Ingredienti: [[ *{ingredienti.size()} ]]</h3>
+	<ul>
+		<li
+			th:each="ing : *{ingredienti}"
+			th:object="${ing}"
+		>
+			[[ *{nome} ]]
+		</li>
+	</ul>
+	<br>
 	<h3>Offerte: [[ *{offerte.size()} ]]</h3>
-	<a th:href="@{/pizze/{id}/offerte/create (id=*{id})}">
+	<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/pizze/{id}/offerte/create (id=*{id})}">
 		CREA NUOVA OFFERTA
 	</a>
 	<ul>
@@ -19,7 +29,7 @@
 			th:object="${offerta}"
 		>
 			[[ *{titolo} ]] - [[ *{percSconto} ]]% - [[ *{finalPrice} ]]E
-			<a th:href="@{/offerta/update/{id} (id=*{id})}">MODIFICA</a>
+			<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/offerta/update/{id} (id=*{id})}">MODIFICA</a>
 		</li>
 	</ul>
 </body>
